@@ -1,0 +1,17 @@
+#github action
+name: Deloy Inweb
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: unbutu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .Net Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Install dependencies
+        run: dotnet restore ./Inholdings/Inholdings.csproj
+      - name: Build
+        run: dotnet build ./Inholdings/Inholdings.csproj
