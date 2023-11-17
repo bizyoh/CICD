@@ -1,9 +1,8 @@
-
-name: Build and deploy ASP.Net Core app to FTP
+name: Build and Deploy ASP.Net Core app to FTP
 
 env:
-  WEB_PATH: '/'                            # set this to the path to your web app project
-  DOTNET_VERSION: '7.0.x'                  # set this to the .NET Core version to use
+  WEB_PATH: '/'                            # Set this to the path to your web app project
+  DOTNET_VERSION: '7.0.x'                  # Set this to the .NET Core version to use
 
 on:
   push:
@@ -17,7 +16,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v2
@@ -41,10 +41,9 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
-      - name: Print Current Working Directory
-        run: pwd
+          name: dotnet-app
+          path: ./Release
+
   deploy:
     permissions:
       contents: none
@@ -52,14 +51,16 @@ jobs:
     needs: build
     environment:
       name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: 📂 Upload files to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: 103.90.220.198
           username: in-web
           password: QMKZAjF^HWImy+Gv@2
-          local-dir: ./Release/
+          local-dir: './Release/'
           server-dir: ${{ env.WEB_PATH }}
