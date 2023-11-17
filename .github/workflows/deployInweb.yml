@@ -3,7 +3,11 @@ name: Build and deploy ASP.Net Core app to FTP
 
 env:
   WEB_PATH: '/'                            # set this to the path to your web app project
+<<<<<<< HEAD
   DOTNET_VERSION: '7.0.13'                  # set this to the .NET Core version to use
+=======
+  DOTNET_VERSION: '7.0.x'                  # set this to the .NET Core version to use
+>>>>>>> 813ec08d1efa2b80304b2a31ff72cd1d0745f7e1
 
 on:
   push:
@@ -60,5 +64,9 @@ jobs:
           server: 103.90.220.198
           username: in-web
           password: QMKZAjF^HWImy+Gv@2
+<<<<<<< HEAD
           local-dir: ${{env.DOTNET_ROOT}}/myapp
+=======
+          local-dir: /Inholdings/
+>>>>>>> 813ec08d1efa2b80304b2a31ff72cd1d0745f7e1
           server-dir: ${{ env.WEB_PATH }}
