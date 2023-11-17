@@ -60,5 +60,5 @@ jobs:
           server: 103.90.220.198
           username: in-web
           password: QMKZAjF^HWImy+Gv@2
-          local-dir: /Inholdings/wwwroot/img/pfavico.ico/
+          local-dir: ./Inholdings/wwwroot/img/pfavico.ico/
           server-dir: ${{ env.WEB_PATH }}
