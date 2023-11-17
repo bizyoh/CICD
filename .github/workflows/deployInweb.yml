@@ -38,7 +38,7 @@ jobs:
       - name: dotnet publish
         run: dotnet publish -c Release -o ./Inholdings/Release/
       - name: List artifact contents
-        run: ls -R ${{ github.workspace }}/Inholdings
+        run: ls -R ${{ github.workspace }}/Inholdings/Release
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
