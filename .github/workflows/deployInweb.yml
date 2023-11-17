@@ -36,14 +36,14 @@ jobs:
         run: dotnet build --configuration Release 
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ./Inholdings/
+        run: dotnet publish -c Release -o ./Inholdings/Release
       - name: List artifact contents
         run: ls -R ${{ github.workspace }}/Inholdings
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: dotnet-app
-          path: ./Inholdings/
+          path: ./Inholdings/Release
 
   deploy:
     permissions:
@@ -63,5 +63,5 @@ jobs:
           server: 103.90.220.198
           username: in-web
           password: QMKZAjF^HWImy+Gv@2
-          local-dir: ./Inholdings/
+          local-dir: ./Inholdings/Release
           server-dir: ${{ env.WEB_PATH }}
