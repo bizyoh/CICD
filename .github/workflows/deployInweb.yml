@@ -43,7 +43,8 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
+- name: Print Current Working Directory
+  run: pwd
   deploy:
     permissions:
       contents: none
