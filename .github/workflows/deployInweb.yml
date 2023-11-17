@@ -11,7 +11,7 @@ env:
   DOTNET_VERSION: '7.0.x'                  # Set this to the .NET Core version to use
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,9 +37,23 @@ jobs:
         run: |
           dotnet build --configuration Release
           dotnet publish -c Release -o ./Inholdings/Release/
-          
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
+        with:
+          name: dotnet-app
+          path: ./Inholdings/Release/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
         with:
           name: dotnet-app
           path: ./Inholdings/Release/
