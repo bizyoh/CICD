@@ -36,7 +36,7 @@ jobs:
         run: dotnet build --configuration Release 
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/Inholdings
+        run: dotnet publish -c Release -o ./Release
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -61,4 +61,5 @@ jobs:
           server: 103.90.220.198
           username: in-web
           password: QMKZAjF^HWImy+Gv@2
+          local-dir: ./Release/
           server-dir: ${{ env.WEB_PATH }}
