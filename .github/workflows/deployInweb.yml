@@ -31,8 +31,8 @@ jobs:
       - name: 📂 Upload files to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: 103.90.220.198
+          username: in-web
+          password: QMKZAjF^HWImy+Gv@2
           local-dir: ./Inholdings/Release/
           server-dir: ${{ env.WEB_PATH }}
