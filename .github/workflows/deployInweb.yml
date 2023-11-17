@@ -36,13 +36,13 @@ jobs:
       - name: Build and Publish
         run: |
           dotnet build --configuration Release
-          dotnet publish -c Release -o ./Inholdings/Release/
+          dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: dotnet-app
-          path: ./Inholdings/Release/
+          path: ${{env.DOTNET_ROOT}}/myapp/
 
   deploy:
     needs: build
@@ -56,7 +56,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dotnet-app
-          path: ./Inholdings/Release/
+          path: ${{env.DOTNET_ROOT}}/myapp/
 
       - name: 📂 Upload files to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -64,5 +64,5 @@ jobs:
           server: 103.90.220.198
           username: in-web
           password: QMKZAjF^HWImy+Gv@2
-          local-dir: ./Inholdings/Release/
+          local-dir: ${{env.DOTNET_ROOT}}/myapp/
           server-dir: ${{ env.WEB_PATH }}
